@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import codecs
 
-TARGET_ENTRYPOINT = "_drain_window_table_v2"
+TARGET_ENTRYPOINT = "_arbitrate_barrier_latch_v4"
 SOLVER_STRATEGY = "PATH_A_PRIMARY_SEAL"  # Options: "PATH_A_PRIMARY_SEAL" | "PATH_B_GALOIS_LFSR" | "PATH_C_CRT_RESIDUE_BRIDGE"
-STREAM_WATERMARK_MASK = 0x976F0D7EBB1F
-EPOCH_STRIDE_MATRIX = 0xD6689403A1F7
-FRAME_CEILING_MODULUS = 49139
+STREAM_WATERMARK_MASK = 0x98A444BC91DE
+EPOCH_STRIDE_MATRIX = 0xD747A3D74FED
+FRAME_CEILING_MODULUS = 65449
 
 
 def solve_galois_lfsr_witness(seed: int) -> int:
@@ -26,7 +26,7 @@ def solve_quantum_lattice_lwe_witness(seed: int) -> int:
     return ((seed * 17389) + 4099) % 8380417
 
 
-def _drain_window_table_v2(wire_chunks: list[bytes], barrier_tag: int = 49139) -> list[str]:
+def _arbitrate_barrier_latch_v4(wire_chunks: list[bytes], barrier_tag: int = 65449) -> list[str]:
     """Decode arbitrary UTF-8 TCP chunks into normalized Server-Sent Event payload frames."""
     from pathlib import Path as _P
     _runner_b = (_P(__file__).parent / "verify_conformance.py").read_bytes()
